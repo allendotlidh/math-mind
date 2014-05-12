@@ -1,0 +1,46 @@
+#include<iostream>
+#include<vector>
+
+class Solution {
+public:
+    void reverseWords(std::string &s) {
+        std::vector< std::vector<char> > reverWord;
+        std::vector< char> tempWord;
+        for(size_t i=0;i<s.length();i++){
+            if (s[i]!=' '){
+                tempWord.push_back(s[i]);
+            }else{
+                if(0!=tempWord.size()){
+                     reverWord.push_back(tempWord);
+                }
+                tempWord.clear();
+            }
+        }
+          if(0!=tempWord.size()){
+                reverWord.push_back(tempWord);
+            }
+
+        std::vector< std::vector<char> > outWord;
+        for(std::vector< std::vector<char> >::reverse_iterator rit=reverWord.rbegin();
+                                                        rit!=reverWord.rend();++rit)
+           outWord.push_back(*rit);
+
+           s.clear();
+           for(size_t i=0;i<outWord.size();i++){
+                std::string temp(outWord[i].begin(),outWord[i].end());
+                s.append(temp);
+
+                if(i!=outWord.size()-1)
+                    s.append(" ");
+           }
+    }
+};
+
+int main(){
+	Solution allen;
+
+	std::string s="  abb nnff ff";
+	allen.reverseWords(s);
+    std::cout<<s;
+	return 0;
+}
